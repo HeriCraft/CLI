@@ -1,4 +1,4 @@
-package tv.nosy.models.dao;
+package tv.nosy.cli.models.dao;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -32,9 +32,8 @@ public class Cd implements Serializable {
     @Column(name = "PASS")
     private String code;
 
-    @OneToOne(mappedBy = "HL", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "c", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    @Column(name = "H_FK")
     private HL history;
 
     public Cd() {

@@ -1,4 +1,4 @@
-package tv.nosy.models.dao;
+package tv.nosy.cli.models.dao;
 
 import java.io.Serializable;
 
@@ -32,9 +32,8 @@ public class Admin implements Serializable{
     @Column(name = "MAIL")
     private String mail;
 
-    @OneToOne(mappedBy = "HL", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    @Column(name = "H_FK")
     private HL history;
 
 

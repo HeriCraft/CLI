@@ -1,4 +1,4 @@
-package tv.nosy.models.dao;
+package tv.nosy.cli.models.dao;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -30,13 +30,11 @@ public class HL implements Serializable{
     @OneToOne
     @MapsId
     @JoinColumn(name = "idAdmin")
-    @Column(name = "USR")
     private Admin admin;
 
     @OneToOne
     @MapsId
     @JoinColumn(name = "idCd")
-    @Column(name = "pwd")
     private Cd c;
 
     @Column(name = "LAST_LOGIN")
