@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Friend form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Friend Form</h1>
+    <form th:action="@{/register}" th:object="${registerInfo}" method="post">
+        <p>Username: <input type="text" name="uname"/></p>
+        <p>E-Mail: <input type="email" name="mail"/></p>
+        <p>Password: <input type="password" name="pass"/></p>
+        <p><button type="submit"/>Register</button></p>
+    </form>
+</body>
+</html>
