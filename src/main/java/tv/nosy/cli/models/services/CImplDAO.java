@@ -2,6 +2,7 @@ package tv.nosy.cli.models.services;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import tv.nosy.cli.models.dao.Cd;
@@ -35,17 +36,81 @@ public class CImplDAO implements CDAO {
 
     @Override
     public void addCode(Cd c) {
-
+        if(!em.isOpen()){
+            this.createEm();
+        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        try{
+            em.persist(c);
+            transaction.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }finally{
+            if(em.isOpen()){
+                em.close();
+            }
+        }   
     }
 
     @Override
     public void update(Cd c) {
-
-
+        if(!em.isOpen()){
+            this.createEm();
+        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        try{
+            em.merge(c);
+            transaction.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }finally{
+            if(em.isOpen()){
+                em.close();
+            }
+        }
     }
 
     @Override
-    public void remove(Cd c) {
+    public void delete(Cd c) {
+        if(!em.isOpen()){
+            this.createEm();
+        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        try{
+            em.remove(c);
+            transaction.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }finally{
+            if(em.isOpen()){
+                em.close();
+            }
+        }
+    }
 
-    }    
+    @Override
+    public void delete(long id) {
+        if(!em.isOpen()){
+            this.createEm();
+        }
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        try{
+            em.remove(em.find(Cd.class, id));
+            transaction.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }finally{
+            if(em.isOpen()){
+                em.close();
+            }
+        }
+    }
 }

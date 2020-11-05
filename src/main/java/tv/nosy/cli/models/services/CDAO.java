@@ -6,5 +6,6 @@ public interface CDAO {
     public Cd getCode(long ref);
     public void addCode(Cd c);
     public void update(Cd c);
-    public void remove(Cd c);
+    public void delete(Cd c);
+    public void delete(long id);
 }
