@@ -4,15 +4,18 @@ import tv.nosy.cli.models.dao.Admin;
 import tv.nosy.cli.models.dao.Cd;
 import tv.nosy.cli.models.services.AdminImplDAO;
 import tv.nosy.cli.models.services.CImplDAO;
+import tv.nosy.cli.models.services.HLImplDAO;
 
 public class RegisterModel {
-    private AdminImplDAO aid = new AdminImplDAO();
-    private CImplDAO cid = new CImplDAO();
+    private static AdminImplDAO aid = new AdminImplDAO();
+    private static CImplDAO cid = new CImplDAO();
+    private static HLImplDAO hid = new HLImplDAO();
 
-    public boolean register(Admin a, Cd c){
-        try{
+    public static boolean register(Admin a, Cd c) {
+        try {
             aid.addAdmin(a);
             cid.addCode(c);
+            hid.addHL(a, c);
         }catch(Exception e){
             e.printStackTrace();
         }
