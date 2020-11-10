@@ -62,6 +62,30 @@ public class AdminImplDAO implements AdminDAO {
         return null;
     }
 
+
+    public Admin getAdminByName(String nm){
+        if(em == null || !em.isOpen()){
+            this.createEm();
+        }
+        try{
+            Query q = em.createQuery("SELECT a FROM Admin a WHERE a.username = :nam");
+            q.setParameter("nam", nm);
+            Object o = q.getSingleResult();
+            Admin a = (Admin) o;
+            System.out.println("===================================================================");
+            System.out.println(a.getUsername());
+            System.out.println("===================================================================");
+            return a;
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            if(em.isOpen()){
+                em.close();
+            }
+        }
+        return null;
+    }
+
     @Override
     public Admin getAdmin(long id) {
         Admin a = null;

@@ -87,13 +87,25 @@ public class HLImplDAO implements HLDAO {
     }
 
     @Override
-    public HL getHLByAdmin(long ref) {
+    public HL getHLByAdmin(long id) {
         if(em == null || !em.isOpen()){
             this.createEm();
         }
         try{
-            Query q = em.createQuery("Select h from HL h where h.admin = :rf");
-            q.setParameter("rf", ref);
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("Creatting query");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            Query q = em.createQuery("Select h from HL h where h.admin = "+id);
+            System.out.println("Setting parameter");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("Creatting query");
+            // System.out.println(q.toString());
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            // q.setParameter(1, id);
+            System.out.println();
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            System.out.println("Returnning result");
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             return (HL) q.getSingleResult();
         }catch(Exception e){
             e.printStackTrace();

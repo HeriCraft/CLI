@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Formatter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -55,21 +55,31 @@ public class Cd implements Serializable {
         return code;
     }
 
-    public void setCode(String code) throws NoSuchAlgorithmException {
-        String pass = code;
+    public void setCode(String cd) throws NoSuchAlgorithmException {
+        String pass = "";
         try {
-            byte[] converti = code.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] finalByte = md.digest(converti);
-
-            pass = finalByte.toString();
-        } catch (UnsupportedEncodingException e) {
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(cd.getBytes("UTF-8"));
+            pass = byteToHex(crypt.digest());
+        } catch (Exception e) {
             System.out.println("Misy olana");
             e.printStackTrace();
         }
 
 
         this.code = pass;
+    }
+
+    private String byteToHex(byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash)
+        {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
     
     

@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -26,7 +25,7 @@ public class Admin implements Serializable{
     @Column(name = "ID")
     private long idAdmin;
 
-    @Column(name = "UNAME")
+    @Column(name = "UNAME", unique = true)
     private String username;
 
     @Column(name = "MAIL")
