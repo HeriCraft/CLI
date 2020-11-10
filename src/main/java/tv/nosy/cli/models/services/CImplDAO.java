@@ -18,7 +18,7 @@ public class CImplDAO implements CDAO {
 
     @Override
     public Cd getCode(long ref) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         try{
@@ -36,7 +36,7 @@ public class CImplDAO implements CDAO {
 
     @Override
     public void addCode(Cd c) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -56,7 +56,7 @@ public class CImplDAO implements CDAO {
 
     @Override
     public void update(Cd c) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -76,7 +76,7 @@ public class CImplDAO implements CDAO {
 
     @Override
     public void delete(Cd c) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -96,7 +96,7 @@ public class CImplDAO implements CDAO {
 
     @Override
     public void delete(long id) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();

@@ -26,7 +26,7 @@ public class HLImplDAO implements HLDAO {
 
     @Override
     public void addHL(HL hl) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -46,14 +46,14 @@ public class HLImplDAO implements HLDAO {
 
     @Override
     public void addHL(Admin a, Cd c) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         try{
             Date dt = Date.valueOf(LocalDate.now());
-            HL hl = new HL(0, a, c, dt, Generater.generateKeyValue());
+            HL hl = new HL(a, c, dt, Generater.generateKeyValue());
             em.persist(hl);
             transaction.commit();
         }catch(Exception e){
@@ -68,7 +68,7 @@ public class HLImplDAO implements HLDAO {
 
     @Override
     public void remove(HL hl) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -88,7 +88,7 @@ public class HLImplDAO implements HLDAO {
 
     @Override
     public HL getHLByAdmin(long ref) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         try{
@@ -108,7 +108,7 @@ public class HLImplDAO implements HLDAO {
     @Override
     public HL getHLByCd(long ref) {
         
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         try{
@@ -127,7 +127,7 @@ public class HLImplDAO implements HLDAO {
 
     @Override
     public List<HL> getAllHL() {
-        if(em.isOpen() == false){
+        if(em == null || em.isOpen() == false){
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("UP_MN");
             em = emf.createEntityManager();
         }

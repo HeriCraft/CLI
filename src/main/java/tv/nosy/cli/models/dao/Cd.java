@@ -33,7 +33,6 @@ public class Cd implements Serializable {
     private String code;
 
     @OneToOne(mappedBy = "c", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private HL history;
 
     public Cd() {

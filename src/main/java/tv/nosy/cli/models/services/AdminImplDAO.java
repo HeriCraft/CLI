@@ -24,7 +24,7 @@ public class AdminImplDAO implements AdminDAO {
 
     @Override
     public void update(Admin a) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -44,7 +44,7 @@ public class AdminImplDAO implements AdminDAO {
 
     @Override
     public List<Admin> getAllAdmin() {
-        if(em.isOpen() == false){
+        if(em == null || em.isOpen() == false){
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("UP_MN");
             em = emf.createEntityManager();
         }
@@ -65,7 +65,7 @@ public class AdminImplDAO implements AdminDAO {
     @Override
     public Admin getAdmin(long id) {
         Admin a = null;
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         try{
@@ -82,7 +82,7 @@ public class AdminImplDAO implements AdminDAO {
 
     @Override
     public void delete(long id) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();
@@ -102,7 +102,7 @@ public class AdminImplDAO implements AdminDAO {
 
     @Override
     public void addAdmin(Admin a) {
-        if(!em.isOpen()){
+        if(em == null || !em.isOpen()){
             this.createEm();
         }
         EntityTransaction transaction = em.getTransaction();

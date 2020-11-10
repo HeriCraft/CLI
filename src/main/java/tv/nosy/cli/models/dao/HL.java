@@ -21,19 +21,13 @@ public class HL implements Serializable{
      *
      */
     private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "REF")
-    private long reference;
 
+    @Id
     @OneToOne
-    @MapsId
     @JoinColumn(name = "idAdmin")
     private Admin admin;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "idCd")
     private Cd c;
 
@@ -46,21 +40,13 @@ public class HL implements Serializable{
     public HL() {
     }
 
-    public HL(long reference, Admin admin, Cd c, Date date, String keyValue) {
-        this.reference = reference;
+    public HL(Admin admin, Cd c, Date date, String keyValue) {
         this.admin = admin;
         this.c = c;
         this.date = date;
         this.keyValue = keyValue;
     }
 
-    public long getReference() {
-        return reference;
-    }
-
-    public void setReference(long reference) {
-        this.reference = reference;
-    }
 
     public Admin getAdmin() {
         return admin;

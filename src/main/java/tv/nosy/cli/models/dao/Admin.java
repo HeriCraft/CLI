@@ -33,7 +33,6 @@ public class Admin implements Serializable{
     private String mail;
 
     @OneToOne(mappedBy = "admin", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private HL history;
 
 
