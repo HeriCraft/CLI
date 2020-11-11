@@ -2,6 +2,8 @@ package tv.nosy.cli.controller;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,24 +21,20 @@ import tv.nosy.cli.models.utilities.RegisterSubmission;
 public class MainController {
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
-    public String getLoginPage(Model model) {
+    public String getLoginPage(Model model, HttpSession session) {
+        if(session.getAttribute("admin") != null){
+            return "redirect:/home";
+        }
         model.addAttribute("loginInfo", new LoginInfo());
         return "login";
     }
     @RequestMapping(value = {"/", "/auth"}, method = RequestMethod.POST)
-    public String authentification(@ModelAttribute("loginInfo") LoginInfo info){
-        try{
-            System.out.println("************************************************************");
-            System.out.println("Getting Admin");
-            System.out.println("************************************************************");
-            
+    public String authentification(@ModelAttribute("loginInfo") LoginInfo info, HttpSession session){
+
+        try{            
             Admin a = LoginModel.auth(info.getUname(), info.getPass());
             if(a != null){
-                System.out.println("==================================");
-                System.out.println(a.getMail());
-                System.out.println(a.getUsername());
-                System.out.println("Loggin Mety");
-                System.out.println("==================================");
+                session.setAttribute("admin", a);
                 return "redirect:/home";
             }
         }catch(Exception e){
@@ -46,15 +44,21 @@ public class MainController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String getRegisterPage(Model model) {
+    public String getRegisterPage(Model model, HttpSession session) {
+        if(session.getAttribute("admin") != null){
+            return "redirect:/home";
+        }
         model.addAttribute("registerInfo", new RegisterSubmission());
         return "register";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String getRegistrationProcess(@ModelAttribute("registerInfo") RegisterSubmission info)
+    public String getRegistrationProcess(@ModelAttribute("registerInfo") RegisterSubmission info, HttpSession session)
             throws NoSuchAlgorithmException {
-
+        
+        if(session.getAttribute("admin") != null){
+            return "redirect:/home";
+        }
         // Eto aloha d essais
         Admin a = new Admin();
         Cd c = new Cd();
@@ -64,6 +68,22 @@ public class MainController {
         c.setCode(info.getPass());
         
         RegisterModel.register(a, c);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public String getHomePage(Model model, HttpSession session){
+        if(session.getAttribute("admin")==null){
+            return "redirect:/";
+        }
+        model.addAttribute("admin", (Admin) session.getAttribute("admin"));
+        return "home";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session){
+        session.invalidate();
 
         return "redirect:/";
     }

@@ -72,9 +72,9 @@ public class AdminImplDAO implements AdminDAO {
             q.setParameter("nam", nm);
             Object o = q.getSingleResult();
             Admin a = (Admin) o;
-            System.out.println("===================================================================");
-            System.out.println(a.getUsername());
-            System.out.println("===================================================================");
+            // System.out.println("===================================================================");
+            // System.out.println(a.getUsername());
+            // System.out.println("===================================================================");
             return a;
         }catch(Exception e){
             e.printStackTrace();

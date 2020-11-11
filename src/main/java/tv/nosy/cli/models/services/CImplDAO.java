@@ -72,18 +72,13 @@ public class CImplDAO implements CDAO {
             // Find HL
             HL tadiavina = em.find(HL.class, a.getIdAdmin());
             Cd c = em.find(Cd.class, tadiavina.getC().getIdCd());
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             Cd gen = Generater.generateLittleCode(ps);
             gen.setIdCd(c.getIdCd());
-            System.out.println(gen.getCode()+" ET "+ c.getCode());
-            // System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println(c.getCode());
+
             if(c.getCode().equals(gen.getCode())){
                 res = true;
             }
-            System.out.println(gen.getCode());
-
+            
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -96,7 +91,7 @@ public class CImplDAO implements CDAO {
     }
 
     /**
-     * 
+     * Farany
      */
 
     @Override
