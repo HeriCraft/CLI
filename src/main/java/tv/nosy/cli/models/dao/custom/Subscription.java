@@ -1,9 +1,8 @@
-package tv.nosy.cli.models.dao;
+package tv.nosy.cli.models.dao.custom;
 
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,28 +12,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "CLI")
-public class Client implements Serializable{
+@Table(name = "SUBS")
+public class Subscription implements Serializable{
 
     /**
      *
      */
-    private static final long serialVersionUID = -3607580012274399598L;
-    
+    private static final long serialVersionUID = -6642071325109409466L;
+
     @Id
-    @Column(name = "ID")
+    @Column(name = "REF")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long reference;
 
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "TEL")
-    private String tel;
+    @Column(name = "PRICE")
+    private long price;
+    
+    @OneToMany(mappedBy = "abonnement")
+    private List<ReSubscription> ref_ab;
 
-    @Column(name = "MAIL")
-    private String mail;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Box> box;
 }
