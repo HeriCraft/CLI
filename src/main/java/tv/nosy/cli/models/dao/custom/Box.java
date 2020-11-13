@@ -25,13 +25,46 @@ public class Box implements Serializable{
     @Id
     @Column(name = "REF")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long reference;
+    private Long reference;
 
     @ManyToOne
     @JoinColumn(name = "reference", nullable = true)
     private Achat ref_achat;
 
     @OneToMany(mappedBy = "box")
-    private List<ReSubscription> ref_ab;
+    private List<ReSubscription> ref_abnm;
+
+    public Box() {
+    }
+
+    public Box(Long reference, Achat ref_achat, List<ReSubscription> ref_abnm) {
+        this.reference = reference;
+        this.ref_achat = ref_achat;
+        this.ref_abnm = ref_abnm;
+    }
+
+    public Long getReference() {
+        return reference;
+    }
+
+    public void setReference(Long reference) {
+        this.reference = reference;
+    }
+
+    public Achat getRef_achat() {
+        return ref_achat;
+    }
+
+    public void setRef_achat(Achat ref_achat) {
+        this.ref_achat = ref_achat;
+    }
+
+    public List<ReSubscription> getRef_abnm() {
+        return ref_abnm;
+    }
+
+    public void setRef_abnm(List<ReSubscription> ref_abnm) {
+        this.ref_abnm = ref_abnm;
+    }
 
 }

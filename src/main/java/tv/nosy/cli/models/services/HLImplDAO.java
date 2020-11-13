@@ -103,9 +103,6 @@ public class HLImplDAO implements HLDAO {
             System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             // q.setParameter(1, id);
             System.out.println();
-            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            System.out.println("Returnning result");
-            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             return (HL) q.getSingleResult();
         }catch(Exception e){
             e.printStackTrace();

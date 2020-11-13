@@ -32,6 +32,45 @@ public class Subscription implements Serializable{
     private long price;
     
     @OneToMany(mappedBy = "abonnement")
-    private List<ReSubscription> ref_ab;
+    private List<ReSubscription> ref_abnm;
+
+    public Subscription(long reference, String name, long price, List<ReSubscription> ref_abnm) {
+        this.reference = reference;
+        this.name = name;
+        this.price = price;
+        this.ref_abnm = ref_abnm;
+    }
+
+    public long getReference() {
+        return reference;
+    }
+
+    public void setReference(long reference) {
+        this.reference = reference;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public List<ReSubscription> getRef_abnm() {
+        return ref_abnm;
+    }
+
+    public void setRef_abnm(List<ReSubscription> ref_abnm) {
+        this.ref_abnm = ref_abnm;
+    }
 
 }
