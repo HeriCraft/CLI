@@ -51,7 +51,8 @@ public class AdminImplDAO implements AdminDAO {
         
         try{
             Query query = em.createQuery("Select a from Admin a");
-            return query.getResultList();
+            List<Admin> res = query.getResultList();
+            return res;
         } catch(Exception e){
             e.printStackTrace();
         } finally{
