@@ -1,6 +1,7 @@
 package tv.nosy.cli.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,12 +15,15 @@ import tv.nosy.cli.models.LoginModel;
 import tv.nosy.cli.models.RegisterModel;
 import tv.nosy.cli.models.dao.Admin;
 import tv.nosy.cli.models.dao.Cd;
+import tv.nosy.cli.models.dao.custom.Box;
+import tv.nosy.cli.models.services.custom.BoxImp;
 import tv.nosy.cli.models.utilities.LoginInfo;
 import tv.nosy.cli.models.utilities.RegisterSubmission;
 
 @Controller
 public class MainController {
 
+    protected BoxImp bi;
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String getLoginPage(Model model, HttpSession session) {
         if(session.getAttribute("admin") != null){
@@ -87,4 +91,5 @@ public class MainController {
 
         return "redirect:/";
     }
+
 }

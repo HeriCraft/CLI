@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 th:utext="${admin.username}">Welcome </h1>
+    <h1>Welcome <span th:utext="${admin.username}"></span></h1>
+    <ul>
+        <li><a th:href="@{/list/box}">Box</a></li>
+        <li><a th:href="@{/list/admin}">Users</a></li>
+        <li><a th:href="@{/list/sub}">Subscription</a></li>
+        <li><a th:href="@{/list/resub}">Re-Subscription</a></li>
+    </ul>
 </body>
 </html>
